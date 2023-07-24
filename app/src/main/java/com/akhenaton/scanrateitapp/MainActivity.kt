@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.akhenaton.scanrateitapp.common.BaseActivity
 import com.akhenaton.scanrateitapp.databinding.ActivityMainBinding
+import com.akhenaton.scanrateitapp.features.login.ui.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : BaseActivity<ActivityMainBinding>(
@@ -18,7 +19,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         if (currentUser == null) {
             goToLogin()
         } else {
-            binding.txtUserDetails.text = currentUser.email
+            binding.txtUserDetails.text = currentUser.displayName
         }
 
         binding.btnLogout.setOnClickListener {
