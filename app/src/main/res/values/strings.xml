@@ -12,8 +12,8 @@
     <string name="close">Close</string>
 
     <!--Menu-->
-    <string name="home">Home</string>
-    <string name="ratings">Avaliações</string>
-    <string name="my_data">Meus Dados</string>
-    <string name="logout">Sair</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_ratings">Avaliações</string>
+    <string name="menu_my_data">Meus Dados</string>
+    <string name="menu_logout">Sair</string>
 </resources>

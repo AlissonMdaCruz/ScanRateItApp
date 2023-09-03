@@ -2,19 +2,23 @@ package com.akhenaton.scanrateitapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
-import android.widget.Toast
-import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.akhenaton.scanrateitapp.common.BaseActivity
 import com.akhenaton.scanrateitapp.databinding.ActivityMainBinding
 import com.akhenaton.scanrateitapp.features.login.ui.LoginActivity
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : BaseActivity<ActivityMainBinding>(
     ActivityMainBinding::inflate
 ) {
 
-    private lateinit var toggle: ActionBarDrawerToggle
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,28 +29,29 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
             goToLogin()
         }
 
-        toggle = ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close)
-        binding.drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
+        setSupportActionBar(binding.appBarMain.toolbar)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        val drawerLayout: DrawerLayout = binding.drawerLayout
+        val navView: NavigationView = binding.navView
+        val navController = findNavController(R.id.nav_host_fragment_content_main)
 
-        binding.navView.setNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.nav_home -> Toast.makeText(this, "item 1", Toast.LENGTH_SHORT).show()
-                R.id.nav_ratings -> Toast.makeText(this, "item 2", Toast.LENGTH_SHORT).show()
-                R.id.nav_my_data -> Toast.makeText(this, "item 3", Toast.LENGTH_SHORT).show()
-                R.id.nav_logout -> Toast.makeText(this, "item 4", Toast.LENGTH_SHORT).show()
-            }
-            true
-        }
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.nav_home, R.id.nav_ratings, R.id.nav_my_data, R.id.nav_logout
+            ), drawerLayout
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (toggle.onOptionsItemSelected(item)) {
-            return true
-        }
-        return super.onOptionsItemSelected(item)
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    private fun logOut() {
+        FirebaseAuth.getInstance().signOut()
+        goToLogin()
     }
 
     private fun goToLogin() {
