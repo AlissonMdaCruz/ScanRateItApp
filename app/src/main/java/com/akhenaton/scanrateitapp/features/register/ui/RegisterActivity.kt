@@ -49,7 +49,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(
     }
 
     private fun initListeners() {
-        binding.txtLoginNow.setOnClickListener {
+        binding.btnCancel.setOnClickListener {
             goToLogin()
         }
 
@@ -66,13 +66,13 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(
     }
 
     private fun onSuccess() {
-        binding.pgbRegister.visibility = View.GONE
+        binding.pgbRegister.visibility = View.INVISIBLE
         Toast.makeText(this, CREATE_SUCCESS, Toast.LENGTH_SHORT).show()
         goToMain()
     }
 
     private fun onError(message: String) {
-        binding.pgbRegister.visibility = View.GONE
+        binding.pgbRegister.visibility = View.INVISIBLE
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 

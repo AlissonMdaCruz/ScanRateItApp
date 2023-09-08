@@ -39,6 +39,16 @@ class AuthRepositoryImpl(
         }
     }
 
+    override suspend fun recoverAccess(email: String): Resource<Boolean> {
+        return try {
+            firebaseAuth.sendPasswordResetEmail(email).await()
+            Resource.Success(true)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Resource.Failure(e)
+        }
+    }
+
     override fun logout() {
         firebaseAuth.signOut()
     }

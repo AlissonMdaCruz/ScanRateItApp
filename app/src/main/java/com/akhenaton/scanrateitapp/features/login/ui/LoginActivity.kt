@@ -12,6 +12,7 @@ import com.akhenaton.scanrateitapp.databinding.ActivityLoginBinding
 import com.akhenaton.scanrateitapp.features.login.viewmodel.LoginViewModel
 import com.akhenaton.scanrateitapp.features.login.viewmodel.LoginViewModelFactory
 import com.akhenaton.scanrateitapp.features.login.viewmodel.LoginViewState
+import com.akhenaton.scanrateitapp.features.recoveraccess.ui.RecoverAccessActivity
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(
     ActivityLoginBinding::inflate
@@ -49,7 +50,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(
     }
 
     private fun initListeners() {
-        binding.txtRegisterNow.setOnClickListener {
+        binding.btnRegister.setOnClickListener {
             goToRegister()
         }
 
@@ -58,6 +59,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(
             val password = binding.edtLoginPassword.text.toString()
             viewModel.validateAccess(email, password)
         }
+
+        binding.txtRegisterNow.setOnClickListener {
+            goToRecoverAccess()
+        }
     }
 
     private fun onLoading() {
@@ -65,18 +70,24 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(
     }
 
     private fun onSuccess() {
-        binding.pgbLogin.visibility = View.GONE
+        binding.pgbLogin.visibility = View.INVISIBLE
         Toast.makeText(this, LOGIN_SUCCESS, Toast.LENGTH_SHORT).show()
         goToMain()
     }
 
     private fun onError(message: String) {
-        binding.pgbLogin.visibility = View.GONE
+        binding.pgbLogin.visibility = View.INVISIBLE
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun goToRegister() {
         val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun goToRecoverAccess() {
+        val intent = Intent(this@LoginActivity, RecoverAccessActivity::class.java)
         startActivity(intent)
         finish()
     }
