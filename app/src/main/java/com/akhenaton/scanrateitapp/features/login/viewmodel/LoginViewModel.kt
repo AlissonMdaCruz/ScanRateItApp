@@ -40,7 +40,7 @@ class LoginViewModel(
     }
 
     companion object {
-        private const val EMPTY_EMAIL = "Empty email"
-        private const val EMPTY_PASSWORD = "Empty password"
+        private const val EMPTY_EMAIL = "Campo email vazio"
+        private const val EMPTY_PASSWORD = "Campo senha vazio"
     }
 }

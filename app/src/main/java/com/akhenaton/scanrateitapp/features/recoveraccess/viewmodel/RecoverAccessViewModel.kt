@@ -5,21 +5,23 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.akhenaton.scanrateitapp.common.repository.AuthRepository
 import com.akhenaton.scanrateitapp.common.repository.Resource
-import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.launch
 
 class RecoverAccessViewModel(
     private val repository: AuthRepository
 ) : ViewModel() {
 
-    val currentUser: FirebaseUser? get() = repository.currentUser
-
     private val _state = MutableLiveData<RecoverAccessViewState>()
     val state get() = _state
 
     fun recoverAccess(email: String) = viewModelScope.launch {
-        val result = repository.recoverAccess(email)
-        handleResult(result)
+        _state.value = RecoverAccessViewState.Loading
+        if (email.isEmpty()) {
+            _state.value = RecoverAccessViewState.Error(EMPTY_EMAIL)
+        } else {
+            val result = repository.recoverAccess(email)
+            handleResult(result)
+        }
     }
 
     private fun handleResult(result: Resource<Boolean>) {
@@ -29,5 +31,9 @@ class RecoverAccessViewModel(
                 RecoverAccessViewState.Error(result.exception.message ?: "")
         }
 
+    }
+
+    companion object {
+        private const val EMPTY_EMAIL = "Campo email vazio"
     }
 }

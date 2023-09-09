@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">ScanRateItApp</string>
+    <string name="logo">Scan Rate It</string>
+
     <string name="access">Acessar</string>
+    <string name="forgot_your_password">Esqueceu sua senha?</string>
+    <string name="dont_have_account">Não tem conta?</string>
+    <string name="sign_up">Cadastre-se</string>
     <string name="email">Email</string>
     <string name="name">Nome</string>
     <string name="password">Senha</string>
+    <string name="confirm_password">Confirmar Senha</string>
     <string name="register">Registrar</string>
     <string name="cancel">Cancelar</string>
     <string name="recover_access">Recuperar acesso</string>

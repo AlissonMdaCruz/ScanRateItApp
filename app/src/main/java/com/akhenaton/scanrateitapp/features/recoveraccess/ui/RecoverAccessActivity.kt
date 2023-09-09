@@ -2,6 +2,7 @@ package com.akhenaton.scanrateitapp.features.recoveraccess.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.akhenaton.scanrateitapp.common.BaseActivity
@@ -40,15 +41,17 @@ class RecoverAccessActivity : BaseActivity<ActivityRecoverAccessBinding>(
     }
 
     private fun onLoading() {
-        TODO("Not yet implemented")
+        binding.pgbRecover.visibility = View.VISIBLE
     }
 
     private fun onSuccess() {
-        Toast.makeText(this, "email  de recuperação enviado", Toast.LENGTH_SHORT).show()
+        binding.pgbRecover.visibility = View.INVISIBLE
+        Toast.makeText(this, SUCCESS_MESSAGE, Toast.LENGTH_SHORT).show()
         goToLogin()
     }
 
     private fun onError(message: String) {
+        binding.pgbRecover.visibility = View.INVISIBLE
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
@@ -66,5 +69,9 @@ class RecoverAccessActivity : BaseActivity<ActivityRecoverAccessBinding>(
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    companion object {
+        private const val SUCCESS_MESSAGE = "Email  de recuperação enviado"
     }
 }

@@ -17,12 +17,16 @@ class RegisterViewModel(
     private val _state = MutableLiveData<RegisterViewState>()
     val state get() = _state
 
-    fun validateSignUp(name: String, email: String, password: String) {
+    fun validateSignUp(name: String, email: String, password: String, confirmPassword: String) {
         _state.value = RegisterViewState.Loading
         when {
             name.isEmpty() -> _state.value = RegisterViewState.Error(EMPTY_NAME)
             email.isEmpty() -> _state.value = RegisterViewState.Error(EMPTY_EMAIL)
             password.isEmpty() -> _state.value = RegisterViewState.Error(EMPTY_PASSWORD)
+            confirmPassword.isEmpty() -> _state.value = RegisterViewState.Error(
+                EMPTY_CONFRIM_PASSWORD
+            )
+            password != confirmPassword -> _state.value = RegisterViewState.Error(DIFF_PASSWORD)
             else -> signUp(name, email, password)
         }
     }
@@ -41,8 +45,10 @@ class RegisterViewModel(
     }
 
     companion object {
-        private const val EMPTY_NAME = "Empty name"
-        private const val EMPTY_EMAIL = "Empty email"
-        private const val EMPTY_PASSWORD = "Empty password"
+        private const val EMPTY_NAME = "Campo nome vazio"
+        private const val EMPTY_EMAIL = "Campo email vazio"
+        private const val EMPTY_PASSWORD = "Campo senha vazio"
+        private const val EMPTY_CONFRIM_PASSWORD = "Campo confirmação de senha vazio"
+        private const val DIFF_PASSWORD = "As senhas estão diferentes"
     }
 }

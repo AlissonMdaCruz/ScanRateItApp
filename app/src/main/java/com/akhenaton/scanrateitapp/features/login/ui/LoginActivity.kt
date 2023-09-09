@@ -50,17 +50,17 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(
     }
 
     private fun initListeners() {
-        binding.btnRegister.setOnClickListener {
+        binding.txtSignUp.setOnClickListener {
             goToRegister()
         }
 
         binding.btnLogin.setOnClickListener {
-            val email = binding.edtLoginEmail.text.toString()
-            val password = binding.edtLoginPassword.text.toString()
+            val email = binding.edtLoginEmail.text.toString().trim()
+            val password = binding.edtLoginPassword.text.toString().trim()
             viewModel.validateAccess(email, password)
         }
 
-        binding.txtRegisterNow.setOnClickListener {
+        binding.txtForgotPassword.setOnClickListener {
             goToRecoverAccess()
         }
     }
@@ -71,7 +71,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(
 
     private fun onSuccess() {
         binding.pgbLogin.visibility = View.INVISIBLE
-        Toast.makeText(this, LOGIN_SUCCESS, Toast.LENGTH_SHORT).show()
         goToMain()
     }
 
@@ -96,9 +95,5 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
         startActivity(intent)
         finish()
-    }
-
-    companion object {
-        private const val LOGIN_SUCCESS = "Login Successful"
     }
 }

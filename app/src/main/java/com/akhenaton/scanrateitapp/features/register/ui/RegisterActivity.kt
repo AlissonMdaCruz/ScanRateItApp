@@ -49,15 +49,16 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(
     }
 
     private fun initListeners() {
-        binding.btnCancel.setOnClickListener {
+        binding.btnCancelRegister.setOnClickListener {
             goToLogin()
         }
 
         binding.btnRegister.setOnClickListener {
-            val name = binding.edtRegisterName.text.toString()
-            val email = binding.edtRegisterEmail.text.toString()
-            val password = binding.edtRegisterPassword.text.toString()
-            viewModel.validateSignUp(name, email, password)
+            val name = binding.edtRegisterName.text.toString().trim()
+            val email = binding.edtRegisterEmail.text.toString().trim()
+            val password = binding.edtRegisterPassword.text.toString().trim()
+            val confirmPassword = binding.edtRegisterConfirmPassword.text.toString().trim()
+            viewModel.validateSignUp(name, email, password, confirmPassword)
         }
     }
 
