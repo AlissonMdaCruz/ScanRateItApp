@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "337800324186",
+    "project_id": "scanreateit",
+    "storage_bucket": "scanreateit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:337800324186:android:04b7673c344622de972463",
+        "android_client_info": {
+          "package_name": "com.akhenaton.scanrateitapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "337800324186-lm4844cqsnr8adv4i7gif7jargel9g8g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfKRa4jaKhA4ErK62A_kuysWz1yf7TSFE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "337800324186-lm4844cqsnr8adv4i7gif7jargel9g8g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
