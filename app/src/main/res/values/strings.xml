@@ -14,6 +14,11 @@
     <string name="cancel">Cancelar</string>
     <string name="recover_access">Recuperar acesso</string>
 
+    <string name="search_product">Buscar produto</string>
+    <string name="product_code">Código do produto</string>
+    <string name="search">Buscar</string>
+    <string name="scan_barcode">Escanear código de barra</string>
+
     <string name="open">Open</string>
     <string name="close">Close</string>
 
