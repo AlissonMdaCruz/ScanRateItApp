@@ -39,6 +39,10 @@ class HomeViewModel(private val interactor: HomeInteractor) : ViewModel() {
         _mutableState.postValue(HomeViewState.Success(product))
     }
 
+    fun clearState() {
+        _mutableState.postValue(HomeViewState.Neutral)
+    }
+
     companion object {
         private const val NOT_FOUND = "Produto não encontrado"
     }

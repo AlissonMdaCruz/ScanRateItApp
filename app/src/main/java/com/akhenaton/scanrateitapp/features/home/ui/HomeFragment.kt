@@ -1,5 +1,7 @@
 package com.akhenaton.scanrateitapp.features.home.ui
 
+import android.app.Activity
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +12,13 @@ import androidx.navigation.fragment.findNavController
 import com.akhenaton.scanrateitapp.R
 import com.akhenaton.scanrateitapp.common.BaseFragment
 import com.akhenaton.scanrateitapp.databinding.FragmentHomeBinding
+import com.akhenaton.scanrateitapp.features.home.FragmentIntentIntegrator
 import com.akhenaton.scanrateitapp.features.product.model.ProductModel
 import com.akhenaton.scanrateitapp.features.home.viewmodel.HomeViewModel
 import com.akhenaton.scanrateitapp.features.home.viewmodel.HomeViewModelFactory
 import com.akhenaton.scanrateitapp.features.home.viewmodel.HomeViewState
+import com.google.zxing.integration.android.IntentIntegrator
+import com.google.zxing.integration.android.IntentResult
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
@@ -44,7 +49,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             HomeViewState.Loading -> showLoading()
             is HomeViewState.Error -> showError(state.message)
             is HomeViewState.Success -> showProductInfo(state.product)
+            HomeViewState.Neutral -> cleanView()
         }
+    }
+
+    private fun cleanView() {
+        binding.edtSearchProduct.text?.clear()
+        binding.pgbSearchProduct.visibility = View.INVISIBLE
     }
 
     private fun showLoading() {
@@ -52,14 +63,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun showError(message: String) {
-        binding.pgbSearchProduct.visibility = View.INVISIBLE
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        viewModel.clearState()
     }
 
     private fun showProductInfo(product: ProductModel) {
-        binding.pgbSearchProduct.visibility = View.INVISIBLE
         val bundle = bundleOf(PRODUCT to product)
         findNavController().navigate(R.id.action_home_to_product, bundle)
+        viewModel.clearState()
     }
 
     private fun initListeners() {
@@ -73,7 +84,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun openBarCodeScan() {
-        // todo
+        val scanner = FragmentIntentIntegrator(this)
+        scanner.setDesiredBarcodeFormats(IntentIntegrator.EAN_13)
+        scanner.setBeepEnabled(false) //retira o beep ao scannear
+        scanner.initiateScan()
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(resultCode == Activity.RESULT_OK){
+            val result: IntentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+            if (result.contents == null) {
+                Toast.makeText(requireContext(), "Leitura Cancelada", Toast.LENGTH_LONG).show()
+            } else {
+                viewModel.searchProduct(result.contents)
+            }
+        }
     }
 
     companion object {
