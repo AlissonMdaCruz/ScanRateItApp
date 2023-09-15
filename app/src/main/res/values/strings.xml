@@ -19,6 +19,7 @@
     <string name="product_code">Código do produto</string>
     <string name="search">Buscar</string>
     <string name="scan_barcode">Escanear código de barra</string>
+    <string name="change_data">Alterar Dados</string>
 
     <string name="open">Open</string>
     <string name="close">Close</string>
