@@ -2,6 +2,7 @@ package com.akhenaton.scanrateitapp.features.home.ui
 
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,7 +46,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun setState(state: HomeViewState) {
-        when(state) {
+        when (state) {
             HomeViewState.Loading -> showLoading()
             is HomeViewState.Error -> showError(state.message)
             is HomeViewState.Success -> showProductInfo(state.product)
@@ -68,9 +69,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun showProductInfo(product: ProductModel) {
-        val bundle = bundleOf(PRODUCT to product)
-        findNavController().navigate(R.id.action_home_to_product, bundle)
-        viewModel.clearState()
+        try {
+            val bundle = bundleOf(PRODUCT to product)
+            findNavController().navigate(R.id.action_home_to_product, bundle)
+            viewModel.clearState()
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
     }
 
     private fun initListeners() {
@@ -94,8 +99,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(resultCode == Activity.RESULT_OK){
-            val result: IntentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            val result: IntentResult =
+                IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
             if (result.contents == null) {
                 Toast.makeText(requireContext(), "Leitura Cancelada", Toast.LENGTH_LONG).show()
             } else {
