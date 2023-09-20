@@ -2,7 +2,6 @@ package com.akhenaton.scanrateitapp.features.home.ui
 
 import android.app.Activity
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,7 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.akhenaton.scanrateitapp.R
-import com.akhenaton.scanrateitapp.common.BaseFragment
+import com.akhenaton.scanrateitapp.common.ui.BaseFragment
 import com.akhenaton.scanrateitapp.databinding.FragmentHomeBinding
 import com.akhenaton.scanrateitapp.features.home.FragmentIntentIntegrator
 import com.akhenaton.scanrateitapp.features.product.model.ProductModel

@@ -15,19 +15,25 @@ class AddReviewViewModel(
     private val _mutableState = MutableLiveData<AddReviewViewState>()
     val state get() = _mutableState
 
-    fun validateReview(ean: String, review: String, rating: Float) {
+    fun validateReview(ean: String, product: String, review: String, rating: Float) {
         when {
             review.isEmpty() -> _mutableState.value = AddReviewViewState.Error(EMPTY_REVIEW)
             else -> {
-                val reviewModel = getReviewModel(ean, review, rating)
+                val reviewModel = getReviewModel(ean, product, review, rating)
                 sendReview(reviewModel)
             }
         }
     }
 
-    private fun getReviewModel(ean: String, review: String, rating: Float): ReviewModel =
+    private fun getReviewModel(
+        ean: String,
+        product: String,
+        review: String,
+        rating: Float
+    ): ReviewModel =
         ReviewModel(
             ean = ean,
+            product = product,
             userId = repository.user?.uid ?: EMPTY,
             review = review,
             rating = rating

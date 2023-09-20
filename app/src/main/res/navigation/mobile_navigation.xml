@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/nav_ratings"
-        android:name="com.akhenaton.scanrateitapp.features.ratings.RatingsFragment"
+        android:name="com.akhenaton.scanrateitapp.features.ratings.ui.RatingsFragment"
         android:label="@string/menu_ratings"
         tools:layout="@layout/fragment_ratings" />
 

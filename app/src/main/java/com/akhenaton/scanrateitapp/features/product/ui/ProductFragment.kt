@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.akhenaton.scanrateitapp.R
-import com.akhenaton.scanrateitapp.common.BaseFragment
+import com.akhenaton.scanrateitapp.common.ui.BaseFragment
 import com.akhenaton.scanrateitapp.databinding.FragmentProductBinding
 import com.akhenaton.scanrateitapp.features.product.model.ProductModel
 

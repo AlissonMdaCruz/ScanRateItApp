@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.akhenaton.scanrateitapp.R
-import com.akhenaton.scanrateitapp.common.BaseFragment
+import com.akhenaton.scanrateitapp.common.ui.BaseFragment
 import com.akhenaton.scanrateitapp.databinding.FragmentMyDataBinding
 import com.akhenaton.scanrateitapp.features.mydata.viewmodel.MyDataViewModel
 import com.akhenaton.scanrateitapp.features.mydata.viewmodel.MyDataViewState

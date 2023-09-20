@@ -23,6 +23,9 @@
     <string name="change_pass">Alterar Senha</string>
     <string name="change">Alterar</string>
     <string name="assessment">Avaliação</string>
+    <string name="empty_ratings">Nenhuma avaliação encontrada</string>
+    <string name="error_message">Ocorreu um erro</string>
+    <string name="try_again">tentar novamente</string>
 
     <string name="open">Open</string>
     <string name="close">Close</string>

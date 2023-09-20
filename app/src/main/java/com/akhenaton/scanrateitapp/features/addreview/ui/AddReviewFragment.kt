@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.akhenaton.scanrateitapp.common.BaseFragment
+import com.akhenaton.scanrateitapp.common.ui.BaseFragment
 import com.akhenaton.scanrateitapp.databinding.FragmentAddReviewBinding
 import com.akhenaton.scanrateitapp.features.addreview.viewmodel.AddReviewViewModel
 import com.akhenaton.scanrateitapp.features.addreview.viewmodel.AddReviewViewModelFactory
@@ -70,6 +70,7 @@ class AddReviewFragment : BaseFragment<FragmentAddReviewBinding>() {
             product?.let {
                 viewModel.validateReview(
                     it.code,
+                    it.nome,
                     binding.edtAddReview.text.toString(),
                     binding.rbrAddReview.rating
                 )

@@ -1,4 +1,4 @@
-package com.akhenaton.scanrateitapp.common
+package com.akhenaton.scanrateitapp.common.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater

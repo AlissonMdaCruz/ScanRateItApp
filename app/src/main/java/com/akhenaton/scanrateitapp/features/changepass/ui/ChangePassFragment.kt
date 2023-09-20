@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.akhenaton.scanrateitapp.common.BaseFragment
+import com.akhenaton.scanrateitapp.common.ui.BaseFragment
 import com.akhenaton.scanrateitapp.databinding.FragmentChangePassBinding
 import com.akhenaton.scanrateitapp.features.changepass.viewmodel.ChangePassViewModel
 import com.akhenaton.scanrateitapp.features.changepass.viewmodel.ChangePassViewModelFactory

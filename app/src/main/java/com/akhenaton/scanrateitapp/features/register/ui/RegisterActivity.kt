@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.akhenaton.scanrateitapp.MainActivity
-import com.akhenaton.scanrateitapp.common.BaseActivity
+import com.akhenaton.scanrateitapp.common.ui.BaseActivity
 import com.akhenaton.scanrateitapp.databinding.ActivityRegisterBinding
 import com.akhenaton.scanrateitapp.features.login.ui.LoginActivity
 import com.akhenaton.scanrateitapp.features.register.viewmodel.RegisterViewModel
