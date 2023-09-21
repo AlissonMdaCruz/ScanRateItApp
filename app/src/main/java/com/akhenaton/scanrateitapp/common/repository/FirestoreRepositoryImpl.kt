@@ -39,6 +39,18 @@ class FirestoreRepositoryImpl : FirestoreRepository {
         }
     }
 
+    override suspend fun getProductReviews(ean: String): Resource<List<ReviewModel>> {
+        return try {
+            val result =
+                firestoreDB.collection(REVIEWS_COLLECTION).whereEqualTo(EAN, ean).get().await()
+            val list = mapDocumentsToListReview(result.documents)
+            Resource.Success(list)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+            Resource.Failure(ex)
+        }
+    }
+
     private fun mapDocumentsToListReview(documents: MutableList<DocumentSnapshot>): List<ReviewModel> {
         val reviewList = mutableListOf<ReviewModel>()
 
@@ -61,5 +73,6 @@ class FirestoreRepositoryImpl : FirestoreRepository {
     companion object {
         private const val REVIEWS_COLLECTION = "reviews"
         private const val USER_ID = "userId"
+        private const val EAN = "ean"
     }
 }

@@ -4,6 +4,7 @@
 
     <string name="access">Acessar</string>
     <string name="rate">Avaliar</string>
+    <string name="see_reviews">Ver avaliações</string>
     <string name="forgot_your_password">Esqueceu sua senha?</string>
     <string name="dont_have_account">Não tem conta?</string>
     <string name="sign_up">Cadastre-se</string>
@@ -26,6 +27,7 @@
     <string name="empty_ratings">Nenhuma avaliação encontrada</string>
     <string name="error_message">Ocorreu um erro</string>
     <string name="try_again">tentar novamente</string>
+    <string name="product_ratings">Avaliações do produto</string>
 
     <string name="open">Open</string>
     <string name="close">Close</string>

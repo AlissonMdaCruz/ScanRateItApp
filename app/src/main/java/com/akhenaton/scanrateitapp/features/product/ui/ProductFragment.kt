@@ -21,8 +21,12 @@ class ProductFragment : BaseFragment<FragmentProductBinding>() {
     }
 
     private fun setlisteners() {
-        binding.rbrProduct.setOnClickListener {
-            Toast.makeText(requireContext(), "${(it as RatingBar).rating}", Toast.LENGTH_SHORT).show()
+        binding.imgShareReview.setOnClickListener {
+            // todo
+        }
+        binding.btnGoToReviews.setOnClickListener {
+            val bundle = bundleOf(EAN to product?.code)
+            findNavController().navigate(R.id.action_product_to_product_ratings, bundle)
         }
         binding.btnGoToAddReview.setOnClickListener {
             val bundle = bundleOf(PRODUCT to product)
@@ -44,5 +48,6 @@ class ProductFragment : BaseFragment<FragmentProductBinding>() {
 
     companion object {
         private const val PRODUCT = "product"
+        private const val EAN = "ean"
     }
 }

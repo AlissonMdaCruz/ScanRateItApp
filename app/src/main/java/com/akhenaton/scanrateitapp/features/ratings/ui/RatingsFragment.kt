@@ -52,33 +52,33 @@ class RatingsFragment : BaseFragment<FragmentRatingsBinding>() {
     }
 
     private fun onLoading() {
-        binding.pgbSearchProduct.visibility = View.VISIBLE
+        binding.pgbSearchMyRatings.visibility = View.VISIBLE
         binding.txtMyRatingsEmpty.visibility = View.GONE
         binding.recyclerMyRatings.visibility = View.GONE
         binding.containerMyRatingsError.visibility = View.GONE
     }
 
     private fun onEmptyList() {
-        binding.pgbSearchProduct.visibility = View.GONE
+        binding.pgbSearchMyRatings.visibility = View.GONE
         binding.txtMyRatingsEmpty.visibility = View.VISIBLE
         binding.recyclerMyRatings.visibility = View.GONE
         binding.containerMyRatingsError.visibility = View.GONE
     }
 
     private fun onSuccess(list: List<ReviewModel>) {
-        binding.pgbSearchProduct.visibility = View.GONE
+        binding.pgbSearchMyRatings.visibility = View.GONE
         binding.txtMyRatingsEmpty.visibility = View.GONE
         binding.recyclerMyRatings.visibility = View.VISIBLE
         binding.containerMyRatingsError.visibility = View.GONE
 
         val recyclerView = binding.recyclerMyRatings
-        val adapter = RatingAdapter(list)
+        val adapter = RatingAdapter(list, true)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
     }
 
     private fun onError() {
-        binding.pgbSearchProduct.visibility = View.GONE
+        binding.pgbSearchMyRatings.visibility = View.GONE
         binding.txtMyRatingsEmpty.visibility = View.GONE
         binding.recyclerMyRatings.visibility = View.GONE
         binding.containerMyRatingsError.visibility = View.VISIBLE

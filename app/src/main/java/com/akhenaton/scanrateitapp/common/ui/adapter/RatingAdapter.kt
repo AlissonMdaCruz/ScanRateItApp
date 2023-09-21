@@ -9,7 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.akhenaton.scanrateitapp.R
 import com.akhenaton.scanrateitapp.common.repository.model.ReviewModel
 
-class RatingAdapter(private val reviewsList: List<ReviewModel>) :
+class RatingAdapter(
+    private val reviewsList: List<ReviewModel>,
+    private val isUserRatings: Boolean
+) :
     RecyclerView.Adapter<RatingAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -20,7 +23,7 @@ class RatingAdapter(private val reviewsList: List<ReviewModel>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val review = reviewsList[position]
-        holder.txtName.text = review.product
+        holder.txtName.text = if (isUserRatings) review.product else review.review
         holder.ratingBar.rating = review.rating
     }
 
