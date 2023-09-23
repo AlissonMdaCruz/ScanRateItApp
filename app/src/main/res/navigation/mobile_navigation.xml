@@ -45,6 +45,9 @@
         <action
             android:id="@+id/action_product_to_product_ratings"
             app:destination="@id/nav_product_ratings" />
+        <action
+            android:id="@+id/action_product_to_review"
+            app:destination="@id/nav_review" />
         <argument
             android:name="product"
             app:argType="com.akhenaton.scanrateitapp.features.product.model.ProductModel" />
@@ -70,6 +73,20 @@
         <argument
             android:name="ean"
             app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_review"
+        android:name="com.akhenaton.scanrateitapp.features.review.ui.ReviewFragment"
+        android:label="@string/assessment"
+        tools:layout="@layout/fragment_review">
+        <argument
+            android:name="myreview"
+            app:argType="boolean"
+            android:defaultValue="false"/>
+        <argument
+            android:name="review"
+            app:argType="com.akhenaton.scanrateitapp.common.repository.model.ReviewModel" />
     </fragment>
 
 </navigation>

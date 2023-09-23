@@ -35,6 +35,7 @@ class AddReviewViewModel(
             ean = ean,
             product = product,
             userId = repository.user?.uid ?: EMPTY,
+            userName = repository.user?.displayName ?: EMPTY,
             review = review,
             rating = rating
         )

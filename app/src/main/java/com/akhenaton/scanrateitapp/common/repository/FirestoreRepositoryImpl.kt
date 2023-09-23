@@ -60,10 +60,11 @@ class FirestoreRepositoryImpl : FirestoreRepository {
                 val ean = dados["ean"] as String
                 val product = dados["product"] as String
                 val userId = dados["userId"] as String
+                val userName = dados["userName"] as String
                 val review = dados["review"] as String
                 val rating = (dados["rating"] as Double).toFloat()
 
-                val model = ReviewModel(ean, product, userId, review, rating)
+                val model = ReviewModel(ean, product, userId, userName, review, rating)
                 reviewList.add(model)
             }
         }

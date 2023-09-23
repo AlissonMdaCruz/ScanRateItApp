@@ -81,7 +81,8 @@ class ProductFragment : BaseFragment<FragmentProductBinding>() {
             findNavController().navigate(R.id.action_product_to_add_review, bundle)
         }
         binding.btnGoToMyReview.setOnClickListener {
-            // todo goto my review
+            val bundle = bundleOf(REVIEW to review, MY_REVIEW to true)
+            findNavController().navigate(R.id.action_product_to_review, bundle)
         }
     }
 
@@ -122,5 +123,7 @@ class ProductFragment : BaseFragment<FragmentProductBinding>() {
     companion object {
         private const val PRODUCT = "product"
         private const val EAN = "ean"
+        private const val REVIEW = "REVIEW"
+        private const val MY_REVIEW = "myreview"
     }
 }

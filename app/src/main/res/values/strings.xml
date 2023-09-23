@@ -29,6 +29,8 @@
     <string name="error_message">Ocorreu um erro</string>
     <string name="try_again">tentar novamente</string>
     <string name="product_ratings">Avaliações do produto</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Excluir</string>
 
     <string name="open">Open</string>
     <string name="close">Close</string>
