@@ -3,12 +3,16 @@ package com.akhenaton.scanrateitapp.features.ratings.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.akhenaton.scanrateitapp.R
 import com.akhenaton.scanrateitapp.common.repository.model.ReviewModel
 import com.akhenaton.scanrateitapp.common.ui.BaseFragment
 import com.akhenaton.scanrateitapp.common.ui.adapter.RatingAdapter
 import com.akhenaton.scanrateitapp.databinding.FragmentRatingsBinding
+import com.akhenaton.scanrateitapp.features.product.ui.ProductFragment
 import com.akhenaton.scanrateitapp.features.ratings.viewmodel.RatingsViewModel
 import com.akhenaton.scanrateitapp.features.ratings.viewmodel.RatingsViewModelFactory
 import com.akhenaton.scanrateitapp.features.ratings.viewmodel.RatingsViewState
@@ -72,7 +76,7 @@ class RatingsFragment : BaseFragment<FragmentRatingsBinding>() {
         binding.containerMyRatingsError.visibility = View.GONE
 
         val recyclerView = binding.recyclerMyRatings
-        val adapter = RatingAdapter(list, true)
+        val adapter = RatingAdapter(list, true, ::onItemSelect)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
     }
@@ -82,5 +86,14 @@ class RatingsFragment : BaseFragment<FragmentRatingsBinding>() {
         binding.txtMyRatingsEmpty.visibility = View.GONE
         binding.recyclerMyRatings.visibility = View.GONE
         binding.containerMyRatingsError.visibility = View.VISIBLE
+    }
+
+    private fun onItemSelect(reviewModel: ReviewModel?) {
+        val bundle = bundleOf(REVIEW to reviewModel)
+        findNavController().navigate(R.id.action_ratings_to_review, bundle)
+    }
+
+    companion object {
+        private const val REVIEW = "REVIEW"
     }
 }

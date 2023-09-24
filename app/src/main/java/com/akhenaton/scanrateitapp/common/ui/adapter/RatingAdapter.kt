@@ -11,7 +11,8 @@ import com.akhenaton.scanrateitapp.common.repository.model.ReviewModel
 
 class RatingAdapter(
     private val reviewsList: List<ReviewModel>,
-    private val isUserRatings: Boolean
+    private val isUserRatings: Boolean,
+    private val onItemClick: (ReviewModel?) -> Unit
 ) :
     RecyclerView.Adapter<RatingAdapter.ViewHolder>() {
 
@@ -25,6 +26,7 @@ class RatingAdapter(
         val review = reviewsList[position]
         holder.txtName.text = if (isUserRatings) review.product else review.review
         holder.ratingBar.rating = review.rating
+        holder.item.setOnClickListener { onItemClick.invoke(review) }
     }
 
     override fun getItemCount(): Int {
@@ -34,5 +36,6 @@ class RatingAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val txtName: TextView = itemView.findViewById(R.id.txt_item_rating_name)
         val ratingBar: RatingBar = itemView.findViewById(R.id.rbr_item_rating)
+        val item = itemView
     }
 }

@@ -3,8 +3,11 @@ package com.akhenaton.scanrateitapp.features.productratings.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.akhenaton.scanrateitapp.R
 import com.akhenaton.scanrateitapp.common.repository.model.ReviewModel
 import com.akhenaton.scanrateitapp.common.ui.BaseFragment
 import com.akhenaton.scanrateitapp.common.ui.adapter.RatingAdapter
@@ -74,7 +77,7 @@ class ProductRatingsFragment : BaseFragment<FragmentProductRatingsBinding>() {
         binding.containerProductRatingsError.visibility = View.GONE
 
         val recyclerView = binding.recyclerProductRatings
-        val adapter = RatingAdapter(list, false)
+        val adapter = RatingAdapter(list, false, ::onItemSelect)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
     }
@@ -86,8 +89,14 @@ class ProductRatingsFragment : BaseFragment<FragmentProductRatingsBinding>() {
         binding.containerProductRatingsError.visibility = View.VISIBLE
     }
 
+    private fun onItemSelect(reviewModel: ReviewModel?) {
+        val bundle = bundleOf(REVIEW to reviewModel)
+        findNavController().navigate(R.id.action_product_ratings_to_review, bundle)
+    }
+
     companion object {
         private const val EAN = "ean"
         private const val EMPTY = ""
+        private const val REVIEW = "REVIEW"
     }
 }

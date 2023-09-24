@@ -26,6 +26,21 @@ class FirestoreRepositoryImpl : FirestoreRepository {
         }
     }
 
+    override suspend fun deleteReview(review: ReviewModel): Resource<Boolean> {
+        return try {
+            val querySnapshot =
+                firestoreDB.collection(REVIEWS_COLLECTION).whereEqualTo(USER_ID, review.userId)
+                    .whereEqualTo(EAN, review.ean).get().await()
+            for (document in querySnapshot.documents) {
+                document.reference.delete().await()
+            }
+            Resource.Success(true)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+            Resource.Failure(ex)
+        }
+    }
+
     override suspend fun getUserReviews(): Resource<List<ReviewModel>> {
         return try {
             val result =
