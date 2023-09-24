@@ -9,6 +9,6 @@ data class ReviewModel(
     val product: String,
     val userId: String,
     val userName: String,
-    val review: String,
-    val rating: Float
+    var review: String,
+    var rating: Float
 ) : Parcelable

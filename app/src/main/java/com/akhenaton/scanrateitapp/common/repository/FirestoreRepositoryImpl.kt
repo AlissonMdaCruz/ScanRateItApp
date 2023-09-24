@@ -28,11 +28,34 @@ class FirestoreRepositoryImpl : FirestoreRepository {
 
     override suspend fun deleteReview(review: ReviewModel): Resource<Boolean> {
         return try {
-            val querySnapshot =
-                firestoreDB.collection(REVIEWS_COLLECTION).whereEqualTo(USER_ID, review.userId)
-                    .whereEqualTo(EAN, review.ean).get().await()
+            val querySnapshot = firestoreDB.collection(REVIEWS_COLLECTION)
+                .whereEqualTo(USER_ID, review.userId)
+                .whereEqualTo(EAN, review.ean)
+                .get()
+                .await()
             for (document in querySnapshot.documents) {
                 document.reference.delete().await()
+            }
+            Resource.Success(true)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+            Resource.Failure(ex)
+        }
+    }
+
+    override suspend fun updateReview(review: ReviewModel): Resource<Boolean> {
+        return try {
+            val querySnapshot = firestoreDB.collection(REVIEWS_COLLECTION)
+                .whereEqualTo(USER_ID, review.userId)
+                .whereEqualTo(EAN, review.ean)
+                .get()
+                .await()
+            val updates = hashMapOf(
+                "review" to review.review,
+                "rating" to review.rating
+            )
+            for (document in querySnapshot.documents) {
+                document.reference.update(updates as Map<String, Any>).await()
             }
             Resource.Success(true)
         } catch (ex: Exception) {

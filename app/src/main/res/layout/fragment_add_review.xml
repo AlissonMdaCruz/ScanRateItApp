@@ -79,6 +79,14 @@
             android:layout_weight="1"
             android:text="@string/rate" />
 
+        <Button
+            android:id="@+id/btn_edit_review"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:text="@string/edit" />
+
     </LinearLayout>
 
     <ProgressBar

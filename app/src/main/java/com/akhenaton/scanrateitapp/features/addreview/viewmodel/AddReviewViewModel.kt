@@ -25,6 +25,14 @@ class AddReviewViewModel(
         }
     }
 
+    fun validateEditReview(reviewModel: ReviewModel) {
+        when {
+            reviewModel.review.isEmpty() -> _mutableState.value =
+                AddReviewViewState.Error(EMPTY_REVIEW)
+            else -> sendEditReview(reviewModel)
+        }
+    }
+
     private fun getReviewModel(
         ean: String,
         product: String,
@@ -43,6 +51,12 @@ class AddReviewViewModel(
     private fun sendReview(reviewModel: ReviewModel) = viewModelScope.launch {
         _mutableState.value = AddReviewViewState.Loading
         val result = repository.saveReview(reviewModel)
+        handleResult(result)
+    }
+
+    private fun sendEditReview(reviewModel: ReviewModel) = viewModelScope.launch {
+        _mutableState.value = AddReviewViewState.Loading
+        val result = repository.updateReview(reviewModel)
         handleResult(result)
     }
 

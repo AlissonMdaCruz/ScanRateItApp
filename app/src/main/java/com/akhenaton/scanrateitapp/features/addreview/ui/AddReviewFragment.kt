@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.akhenaton.scanrateitapp.common.repository.model.ReviewModel
 import com.akhenaton.scanrateitapp.common.ui.BaseFragment
 import com.akhenaton.scanrateitapp.databinding.FragmentAddReviewBinding
 import com.akhenaton.scanrateitapp.features.addreview.viewmodel.AddReviewViewModel
@@ -17,6 +18,7 @@ class AddReviewFragment : BaseFragment<FragmentAddReviewBinding>() {
 
     private lateinit var viewModel: AddReviewViewModel
     private var product: ProductModel? = null
+    private var review: ReviewModel? = null
 
     override fun initView() {
         showDetails()
@@ -31,8 +33,26 @@ class AddReviewFragment : BaseFragment<FragmentAddReviewBinding>() {
     ): FragmentAddReviewBinding = FragmentAddReviewBinding.inflate(inflater, container, false)
 
     private fun showDetails() {
+        review = arguments?.getParcelable(REVIEW)
         product = arguments?.getParcelable(PRODUCT)
         binding.txtAddReviewName.text = product?.nome
+        checkIsEditReview()
+    }
+
+    private fun checkIsEditReview() {
+        when (review) {
+            null -> {
+                binding.btnAddReview.visibility = View.VISIBLE
+                binding.btnEditReview.visibility = View.GONE
+            }
+            else -> {
+                binding.btnAddReview.visibility = View.GONE
+                binding.btnEditReview.visibility = View.VISIBLE
+                binding.edtAddReview.setText(review!!.review)
+                binding.rbrAddReview.rating = review!!.rating
+                binding.txtAddReviewName.text = review!!.product
+            }
+        }
     }
 
     private fun instanceViewModel() {
@@ -56,7 +76,7 @@ class AddReviewFragment : BaseFragment<FragmentAddReviewBinding>() {
 
     private fun onSuccess() {
         binding.pgbAddReview.visibility = View.INVISIBLE
-        Toast.makeText(requireContext(), "Review enviada com sucesso!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), SUCCESS_MESSAGE, Toast.LENGTH_SHORT).show()
         findNavController().popBackStack()
     }
 
@@ -76,6 +96,13 @@ class AddReviewFragment : BaseFragment<FragmentAddReviewBinding>() {
                 )
             }
         }
+        binding.btnEditReview.setOnClickListener {
+            review?.let { reviewModel ->
+                reviewModel.review = binding.edtAddReview.text.toString()
+                reviewModel.rating = binding.rbrAddReview.rating
+                viewModel.validateEditReview(reviewModel)
+            }
+        }
         binding.btnCancelAddReview.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -83,5 +110,7 @@ class AddReviewFragment : BaseFragment<FragmentAddReviewBinding>() {
 
     companion object {
         private const val PRODUCT = "product"
+        private const val REVIEW = "REVIEW"
+        private const val SUCCESS_MESSAGE = "Review enviada com sucesso!"
     }
 }
