@@ -1,8 +1,12 @@
 package com.akhenaton.scanrateitapp.features.product.ui
 
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -15,6 +19,7 @@ import com.akhenaton.scanrateitapp.features.product.viewmodel.ProductViewModel
 import com.akhenaton.scanrateitapp.features.product.viewmodel.ProductViewModelFactory
 import com.akhenaton.scanrateitapp.features.product.viewmodel.ProductViewState
 
+@Suppress("DEPRECATION")
 class ProductFragment : BaseFragment<FragmentProductBinding>() {
 
     private lateinit var viewModel: ProductViewModel
@@ -41,7 +46,7 @@ class ProductFragment : BaseFragment<FragmentProductBinding>() {
 
     private fun initObserver() {
         viewModel.state.observe(this) { state ->
-            when(state) {
+            when (state) {
                 ProductViewState.Loading -> onLoading()
                 ProductViewState.Error -> onError()
                 is ProductViewState.Success -> onSuccess(state.list)
@@ -70,7 +75,7 @@ class ProductFragment : BaseFragment<FragmentProductBinding>() {
 
     private fun setlisteners() {
         binding.imgShareReview.setOnClickListener {
-            // todo share
+            shareWhatsApp(getMessageToSend())
         }
         binding.btnGoToReviews.setOnClickListener {
             val bundle = bundleOf(EAN to product?.code)
@@ -84,6 +89,11 @@ class ProductFragment : BaseFragment<FragmentProductBinding>() {
             val bundle = bundleOf(REVIEW to review)
             findNavController().navigate(R.id.action_product_to_review, bundle)
         }
+    }
+
+    private fun getMessageToSend(): String {
+        return "${binding.txtProductCode.text} - ${binding.txtProductName.text}, " +
+                "${binding.rbrProduct.rating} estrelas conforme avaliações feitas pelo app Scan Rate."
     }
 
     private fun showDetails(list: List<ReviewModel>) {
@@ -118,6 +128,28 @@ class ProductFragment : BaseFragment<FragmentProductBinding>() {
     private fun showMyReviewButton() {
         binding.btnGoToAddReview.visibility = View.GONE
         binding.btnGoToMyReview.visibility = View.VISIBLE
+    }
+
+    private fun shareWhatsApp(mensagem: String) {
+        val sendIntent = Intent()
+        sendIntent.action = Intent.ACTION_SEND
+        sendIntent.putExtra(Intent.EXTRA_TEXT, mensagem)
+        sendIntent.type = "text/plain"
+
+        // Verificar se o WhatsApp está instalado no dispositivo
+        val packageManager: PackageManager = requireContext().packageManager
+        val resolveInfoList: List<ResolveInfo> = packageManager.queryIntentActivities(sendIntent, 0)
+
+        if (resolveInfoList.isNotEmpty()) {
+            // Se o WhatsApp estiver instalado, permita que o usuário escolha um contato
+            val intent = Intent(sendIntent)
+            intent.`package` = "com.whatsapp"
+            requireContext().startActivity(intent)
+        } else {
+            // Caso o WhatsApp não esteja instalado, informe o usuário
+            Toast.makeText(requireContext(), "WhatsApp não está instalado.", Toast.LENGTH_SHORT)
+                .show()
+        }
     }
 
     companion object {
