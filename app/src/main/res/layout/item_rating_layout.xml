@@ -37,7 +37,7 @@
         android:layout_marginTop="8dp"
         android:isIndicator="true"
         android:numStars="5"
-        android:rating="3.0"
+        android:progressTint="@color/purple_200"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_item_rating_name" />
 

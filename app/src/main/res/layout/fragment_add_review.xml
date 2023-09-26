@@ -49,17 +49,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:numStars="5"
-        android:stepSize="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        android:progressTint="@color/purple_200"
+        android:stepSize="1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iml_add_review" />
 
     <LinearLayout
         android:id="@+id/container_add_review_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginTop="24dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rbr_add_review">
@@ -84,8 +85,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:visibility="gone"
-            android:text="@string/edit" />
+            android:text="@string/edit"
+            android:visibility="gone" />
 
     </LinearLayout>
 
@@ -95,9 +96,9 @@
         android:layout_height="32dp"
         android:layout_marginTop="32dp"
         android:visibility="invisible"
-        tools:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/container_add_review_buttons" />
+        app:layout_constraintTop_toBottomOf="@+id/container_add_review_buttons"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
