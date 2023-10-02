@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.akhenaton.scanrateitapp.features.home.ui.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_product"
+            app:destination="@id/nav_product" />
+        <argument
+            android:name="product"
+            app:argType="com.akhenaton.scanrateitapp.features.product.model.ProductModel" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_ratings"
+        android:name="com.akhenaton.scanrateitapp.features.ratings.ui.RatingsFragment"
+        android:label="@string/menu_ratings"
+        tools:layout="@layout/fragment_ratings" >
+        <action
+            android:id="@+id/action_ratings_to_review"
+            app:destination="@id/nav_review" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_my_data"
+        android:name="com.akhenaton.scanrateitapp.features.mydata.ui.MyDataFragment"
+        android:label="@string/menu_my_data"
+        tools:layout="@layout/fragment_my_data">
+        <action
+            android:id="@+id/action_data_to_change_data"
+            app:destination="@id/nav_change_data" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_product"
+        android:name="com.akhenaton.scanrateitapp.features.product.ui.ProductFragment"
+        android:label="produto"
+        tools:layout="@layout/fragment_product" >
+        <action
+            android:id="@+id/action_product_to_add_review"
+            app:destination="@id/nav_add_review" />
+        <action
+            android:id="@+id/action_product_to_product_ratings"
+            app:destination="@id/nav_product_ratings" />
+        <action
+            android:id="@+id/action_product_to_review"
+            app:destination="@id/nav_review" />
+        <argument
+            android:name="product"
+            app:argType="com.akhenaton.scanrateitapp.features.product.model.ProductModel" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_change_data"
+        android:name="com.akhenaton.scanrateitapp.features.changepass.ui.ChangePassFragment"
+        android:label="@string/change_pass"
+        tools:layout="@layout/fragment_change_pass" />
+
+    <fragment
+        android:id="@+id/nav_add_review"
+        android:name="com.akhenaton.scanrateitapp.features.addreview.ui.AddReviewFragment"
+        android:label="@string/rate"
+        tools:layout="@layout/fragment_change_pass" >
+        <argument
+            android:name="review"
+            app:argType="com.akhenaton.scanrateitapp.common.repository.model.ReviewModel" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_product_ratings"
+        android:name="com.akhenaton.scanrateitapp.features.productratings.ui.ProductRatingsFragment"
+        android:label="@string/product_ratings"
+        tools:layout="@layout/fragment_product_ratings">
+        <argument
+            android:name="ean"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_product_ratings_to_review"
+            app:destination="@id/nav_review" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_review"
+        android:name="com.akhenaton.scanrateitapp.features.review.ui.ReviewFragment"
+        android:label="@string/assessment"
+        tools:layout="@layout/fragment_review">
+        <argument
+            android:name="review"
+            app:argType="com.akhenaton.scanrateitapp.common.repository.model.ReviewModel" />
+        <action
+            android:id="@+id/action_review_to_edit_review"
+            app:destination="@id/nav_add_review" />
+    </fragment>
+
+</navigation>
