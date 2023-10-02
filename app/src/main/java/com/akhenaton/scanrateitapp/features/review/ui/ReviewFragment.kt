@@ -30,9 +30,13 @@ class ReviewFragment : BaseFragment<FragmentReviewBinding>() {
     override fun initView() {
         instanceViewModel()
         initObserver()
+        setListeners()
+    }
+
+    override fun onResume() {
+        super.onResume()
         getArgs()
         displayDetails()
-        setListeners()
     }
 
     private fun instanceViewModel() {
