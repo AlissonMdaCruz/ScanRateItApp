@@ -3,6 +3,9 @@
     <string name="logo">Scan Rate It</string>
 
     <string name="access">Acessar</string>
+    <string name="rate">Avaliar</string>
+    <string name="see_reviews">Ver avaliações</string>
+    <string name="see_my_review">Ver minha avaliação</string>
     <string name="forgot_your_password">Esqueceu sua senha?</string>
     <string name="dont_have_account">Não tem conta?</string>
     <string name="sign_up">Cadastre-se</string>
@@ -13,6 +16,21 @@
     <string name="register">Registrar</string>
     <string name="cancel">Cancelar</string>
     <string name="recover_access">Recuperar acesso</string>
+
+    <string name="search_product">Buscar produto</string>
+    <string name="product_code">Código do produto</string>
+    <string name="search">Buscar</string>
+    <string name="scan_barcode">Escanear código de barra</string>
+    <string name="new_password">Nova senha</string>
+    <string name="change_pass">Alterar Senha</string>
+    <string name="change">Alterar</string>
+    <string name="assessment">Avaliação</string>
+    <string name="empty_ratings">Nenhuma avaliação encontrada</string>
+    <string name="error_message">Ocorreu um erro</string>
+    <string name="try_again">tentar novamente</string>
+    <string name="product_ratings">Avaliações do produto</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Excluir</string>
 
     <string name="open">Open</string>
     <string name="close">Close</string>

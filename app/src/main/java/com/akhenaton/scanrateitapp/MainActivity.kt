@@ -8,7 +8,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.akhenaton.scanrateitapp.common.BaseActivity
+import com.akhenaton.scanrateitapp.common.ui.BaseActivity
 import com.akhenaton.scanrateitapp.databinding.ActivityMainBinding
 import com.akhenaton.scanrateitapp.features.login.ui.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
